@@ -41,7 +41,7 @@ class MainActivity : AppCompatActivity() {
 
 
     companion object {
-        private lateinit var instance: MainActivity
+        lateinit var instance: MainActivity
 
         fun productsService(): IProduct {
             val retrofit = Retrofit.Builder()

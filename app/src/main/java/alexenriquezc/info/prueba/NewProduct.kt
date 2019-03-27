@@ -24,9 +24,9 @@ class NewProduct : AppCompatActivity() {
             val product: Product = Product()
             product.id = product_id.text.toString()
             product.name = product_name.text.toString()
-            product.price = product_price.text.toString().toFloat()
+            product.price = product_price.text.toString()
             product.category_name = product_category_name.text.toString()
-            product.category_id = 1
+            product.category_id = "2"
             product.created = Date()
             product.description = product_description.text.toString()
 
@@ -38,6 +38,7 @@ class NewProduct : AppCompatActivity() {
                     if (response!!.isSuccessful) {
                         if(response.body() == true){
                             Toast.makeText(this@NewProduct, "Product Saved", Toast.LENGTH_LONG).show()
+                            MainActivity.instance.loadProducts()
                             onBackPressed()
                         }
                     }
