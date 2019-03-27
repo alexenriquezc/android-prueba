@@ -3,8 +3,12 @@ package alexenriquezc.info.prueba
 import alexenriquezc.info.prueba.adapters.ProductsAdapter
 import alexenriquezc.info.prueba.interfaces.IProduct
 import alexenriquezc.info.prueba.models.Product
+import alexenriquezc.info.prueba.models.ProductList
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.activity_main.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -15,50 +19,43 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class MainActivity : AppCompatActivity() {
 
-    lateinit var products:List<Product>
+    lateinit var products:MutableList<Product>
+
+    init {
+        instance = this
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-//        supportActionBar!!.title = "Products"
-//        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
-        val products = arrayListOf<Product>()
-        val product = Product()
-        product.name ="A"
-        product.category_id = 2
-        product.category_name = "A"
-        product.description="AB"
-        product.price = 255f
-        products.add(product)
+        add_product.setOnClickListener {
+            val newProductIntent = Intent(this, NewProduct::class.java)
+            startActivity(newProductIntent)
+        }
 
 
-        val productsAdapter = ProductsAdapter(this, R.layout.list_item, products)
-        product_list.adapter = productsAdapter
-
-
-        //loadProducts()
+        loadProducts()
     }
 
 
-//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-//        // TODO Auto-generated method stub
-//        val id = item.itemId
-//        if (id == android.R.id.home) {
-//            finish()
-//        }
-//        return super.onOptionsItemSelected(item)
-//    }
-
     companion object {
+        private lateinit var instance: MainActivity
+
         fun productsService(): IProduct {
             val retrofit = Retrofit.Builder()
-                .baseUrl("http://localhost/api")
+                .baseUrl(BuildConfig.API_ADDRESS)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
 
             return retrofit.create(IProduct::class.java)
+        }
+
+
+        fun addNewItem(product: Product){
+            //instance.loadProducts()
+            instance.products.add(product)
         }
     }
 
@@ -67,19 +64,19 @@ class MainActivity : AppCompatActivity() {
 
         val service = productsService()
         val request = service.getProducts()
-        request.enqueue(object : Callback<List<Product>> {
+        request.enqueue(object : Callback<ProductList> {
 
-            private var result: List<Product>? = null
-
-            override fun onResponse(call: Call<List<Product>>?, response: Response<List<Product>>?) {
+            override fun onResponse(call: Call<ProductList>?, response: Response<ProductList>?) {
                 if (response!!.isSuccessful) {
-                    result = null
-                    result = response.body()
-
+                    products = response.body()!!.products.toMutableList()
+                    val adapter =ProductsAdapter(products, this@MainActivity)
+                    adapter.notifyDataSetChanged()
+                    product_list.layoutManager = LinearLayoutManager(this@MainActivity)
+                    product_list.adapter = adapter
                 }
             }
 
-            override fun onFailure(call: Call<List<Product>>?, t: Throwable?) {
+            override fun onFailure(call: Call<ProductList>?, t: Throwable?) {
                 t!!.printStackTrace()
             }
         })
