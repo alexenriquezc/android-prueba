@@ -17,8 +17,8 @@ android {
     buildTypes {
 
         debug{
-            //buildConfigField "String", "API_ADDRESS", '"http://localhost:81/api"'
-            buildConfigField "String", "API_ADDRESS", '"https://raw.githubusercontent.com/titopalito/prueba_android/"'
+//            buildConfigField "String", "API_ADDRESS", '"https://raw.githubusercontent.com/titopalito/prueba_android/"'
+            buildConfigField "String", "API_ADDRESS", '" http://02bef92e.ngrok.io/api/"'
         }
 
         release {

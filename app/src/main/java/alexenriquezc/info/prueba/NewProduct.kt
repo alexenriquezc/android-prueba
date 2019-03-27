@@ -12,6 +12,7 @@ import kotlinx.android.synthetic.main.activity_new_product.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.util.*
 
 class NewProduct : AppCompatActivity() {
 
@@ -26,6 +27,8 @@ class NewProduct : AppCompatActivity() {
             product.price = product_price.text.toString().toFloat()
             product.category_name = product_category_name.text.toString()
             product.category_id = 1
+            product.created = Date()
+            product.description = product_description.text.toString()
 
             val service = MainActivity.productsService()
             val request = service.sendProduct(product)
