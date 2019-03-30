@@ -9,4 +9,30 @@
         <!--<item name="windowNoTitle">true</item>-->
     </style>
 
+
+    <style name="FormControlStyle" parent="Base.Widget.AppCompat.EditText">
+        <item name="android:background">@null</item>
+        <item name="android:textSize">@dimen/form_control_text_size</item>
+        <item name="android:layout_height">@dimen/form_control_height</item>
+        <item name="android:paddingStart">@dimen/form_control_padding_start</item>
+        <item name="android:paddingEnd">@dimen/form_control_padding_end</item>
+        <item name="android:layout_marginBottom">@dimen/form_control_margin_bottom</item>
+    </style>
+
+    <style name="LargeFormControlStyle" parent="FormControlStyle">
+        <item name="android:layout_height">@dimen/form_control_large_height</item>
+        <item name="android:gravity">top</item>
+        <item name="android:paddingTop">@dimen/form_control_padding_top</item>
+    </style>
+
+    <style name="FormControlLabelStyle" parent="Base.Widget.AppCompat.TextView">
+        <item name="android:textSize">@dimen/form_control_label_text_size</item>
+        <item name="android:layout_marginTop">@dimen/form_control_margin_top</item>
+        <item name="android:paddingStart">@dimen/form_control_padding_start</item>
+        <item name="android:paddingEnd">@dimen/form_control_padding_end</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+
+
 </resources>

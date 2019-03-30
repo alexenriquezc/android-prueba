@@ -7,9 +7,8 @@ import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
 
-open interface IProduct {
-    //@GET("/product/read.php")
-    @GET("master/read.txt")
+interface IProductService {
+    @GET("product/read.php")
     fun  getProducts(): Call<ProductList>
 
     @POST("product/create.php")

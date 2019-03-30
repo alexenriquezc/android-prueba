@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools" android:id="@+id/navigation_graph"
+            app:startDestination="@id/productsFragment">
+    <fragment android:id="@+id/newProductFragment" android:name="alexenriquezc.info.prueba.NewProductFragment"
+              android:label="fragment_new_product" tools:layout="@layout/fragment_new_product"/>
+    <fragment android:id="@+id/productsFragment" android:name="alexenriquezc.info.prueba.ProductsFragment"
+              android:label="fragment_products" tools:layout="@layout/fragment_products">
+        <action android:id="@+id/to_newProduct"
+                app:destination="@+id/newProductFragment" app:popUpTo="@+id/productsFragment"
+                app:enterAnim="@anim/nav_default_enter_anim" app:exitAnim="@anim/nav_default_exit_anim"
+                app:popEnterAnim="@anim/nav_default_pop_enter_anim" app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
+    </fragment>
+</navigation>

@@ -17,8 +17,8 @@ import kotlinx.android.synthetic.main.list_item.view.*
 open class ProductsAdapter(val products: List<Product>, val context: Context): RecyclerView.Adapter<ProductViewHolder>() {
     override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
         val product = products[position]
-        holder?.productName?.text = product.name
-        holder?.productPrice?.text = "$%.2f".format(product.price)
+        holder.productName?.text = product.name
+        holder.productPrice?.text = "$%.2f".format(product.price)
     }
 
     override fun getItemCount(): Int {
