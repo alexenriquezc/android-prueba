@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity() {
 
 
     companion object {
-        private lateinit var instance: MainActivity
+        lateinit var instance: MainActivity
 
         fun getFab(): FloatingActionButton{
             return instance.fab
